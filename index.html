@@ -12,10 +12,15 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<script type="text/x-mathjax-config">
-		  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		  MathJax.Hub.Config({
+		    tex2jax: {
+		      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+		      processEscapes: true
+		    }
+		  });
 		</script>
 		<script type="text/javascript"
-		  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 		</script>
 	</head>
 	<body class="is-preload">
