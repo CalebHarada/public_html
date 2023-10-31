@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Caleb K. Harada</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  tex2jax: {
+				inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+				processEscapes: true
+			  }
+			});
+		</script>
+		<script type="text/javascript"
+				src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Caleb K. Harada</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="cv.html">Curriculum Vitae</a></li>
+								<li><a href="research.html">Research</a></li>
+								<li><a href="other.html">Other Projects</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						
+						<!-- Content -->
+							<div class="alt wrapper">
+								<div class="inner">
+
+									<h2 class="major">Lagrange Points</h2>
+									<p>An interesting result of the restricted three-body problem, in which two orbiting masses 
+										are much more massive than the third, is the existence of five <a href="https://en.wikipedia.org/wiki/Lagrange_point", 
+										target="_blank">Lagrange points</a>. At each of the Lagrange points, the forces due to the 
+										gravity of the two larger bodies and the centrifugal pseudoforce effectively balance out. Therefore, 
+										in the co-rotating frame of the two massive bodies, a less massive object placed at any of the 
+										Lagrange points will remain stationary (however, the <em>stability</em> at each of the Lagrange points 
+										requires more careful consideration of the Coriolis pseudoforce).
+									</p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-12">
+												<center>
+													<video width="55%" autoplay muted loop>
+														<source src="media/effective_potential.mp4" type="video/mp4">
+													</video>
+												</center>
+											</div>
+										</div>
+									</div>
+									<p>This animation shows the 3D surface of the effective potential felt by a massless particle in the rotating 
+										frame of the Earth-Moon system. The mathematical form of the effective potential is
+
+										$$\phi_{eff}(\vec{r}) = -\frac{G M_1}{|\vec{r} - \vec{r}_1|} - \frac{G M_2}{|\vec{r} - \vec{r}_2|} -\frac{1}{2} \frac{G(M_1 + M_2)}{|\vec{r}_2 - \vec{r}_1|^3} |\vec{r}|^2$$
+
+										where $M_1$, $\vec{r}_1$ and $M_2$, $\vec{r}_2$ are the masses and positions of the Earth and Moon respectively 
+										and $\vec{r}$ is measured from the center of mass. The first two terms are the gravitational potential and the 
+										third term is the centrifugal pseudopotential.
+
+										Here, the effective potential is plotted in log space for contrast, and a 2D contour plot of the potential is projected 
+										onto the bottom of the figure. The larger and smaller black circles represent the positions of the Earth and Moon, and 
+										the blue points show the five Lagrange points (i.e., where the gradient of the potential is zero). 
+									</p>
+
+									<hr>
+									<ul class="actions">
+										<li><a href="other.html#lagrange" class="button primary">
+											<span class="icon solid fa-arrow-left"></span> Return to Other Projects</a></li>
+									</ul>
+
+								</div>
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+				<section id="footer">
+					<div class="inner">
+						<ul class="copyright">
+							<li>&copy; 2023 Caleb K. Harada</li>
+							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							<li>Background art: <a href="https://exoplanets.nasa.gov/resources/118/habitable-exomoon/" target="_blank">NASA/JPL-Caltech</a></li>
+						</ul>
+					</div>
+				</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

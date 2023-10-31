@@ -1,0 +1,231 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Caleb K. Harada</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  tex2jax: {
+				inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+				processEscapes: true
+			  }
+			});
+		</script>
+		<script type="text/javascript"
+				src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Caleb K. Harada</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="cv.html">Curriculum Vitae</a></li>
+								<li><a href="research.html">Research</a></li>
+								<li><a href="other.html">Other Projects</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						
+						<!-- Content -->
+							<div class="alt wrapper">
+								<div class="inner">
+
+									<h2 class="major">N-body Simulations</h2>
+									<p>The general form of the equation for the force of gravity on a particle of mass $m_2$ by another particle $m_1$ is
+										$$\vec{F}_{21}(\vec{r}) = \frac{G m_1 m_2}{|\vec{r}|^2} \hat{r}$$
+										where $\vec{r} \equiv \vec{r}_2 - \vec{r}_1$ is a vector from $m_1$ to $m_2$ and $G$ is the gravitational constant.
+										
+										If we choose an arbitrary cartesian coordinate system, this vector becomes
+										$$\vec{r} = (x_2 - x_1)\hat{x} + (y_2 - y_1)\hat{y} + (z_2 - z_1)\hat{z}$$
+										
+										and
+										\begin{align}
+											|\vec{r}|^2 &= \vec{r} \cdot \vec{r} \\
+														&= (x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2
+										\end{align}
+																				
+										From Newton's Laws, we can also express this force as an acceleration on $m_2$ due to $m_1$:
+										$$\vec{F}_{21}(\vec{r}) = m_2 \ddot{\vec{r}} = \frac{G m_1 m_2}{|\vec{r}|^2} \hat{r}$$
+										$$\ddot{\vec{r}}_{21} = \frac{G m_1}{|\vec{r}_{21}|^2} \hat{r}_{21}$$
+
+										For an ensemble of $N$ particles, we can apply the principle of superposition to compute the acceleration of a particle $m_i$ 
+										due to all other particles:
+										\begin{align}
+											\ddot{\vec{r}}_i &= G \sum_{j \neq i}^N \frac{m_j}{|\vec{r}_{ji}|^2} \hat{r}_{ji} \\
+															&= G \sum_{j \neq i}^N \frac{m_j}{|\vec{r}_{ji}|^2} \frac{\vec{r}_{ji}}{|\vec{r}_{ji}|} \\
+															&= G \sum_{j \neq i}^N \frac{m_j}{|\vec{r}_{ji}|^3} \vec{r}_{ji}
+										\end{align}
+
+										For practical purposes, it helps to break this down into its unit vector components (in cartesian coordinates):
+										\begin{align}
+											\ddot{\vec{x}}_i   &= G \sum_{j \neq i}^N \frac{m_j}{|\vec{r}_{ji}|^3}(x_j - x_i)\hat{x} \\
+											\ddot{\vec{y}}_i   &= G \sum_{j \neq i}^N \frac{m_j}{|\vec{r}_{ji}|^3}(y_j - y_i)\hat{y} \\
+											\ddot{\vec{z}}_i   &= G \sum_{j \neq i}^N \frac{m_j}{|\vec{r}_{ji}|^3}(z_j - z_i)\hat{z} 
+										\end{align}
+
+										To integrate these equations numerically, we need to further break down this set of <i>three</i> 2nd-order ODEs 
+										into a set of <i>six</i> 1st-order ODEs:
+										\begin{align}
+											\dot{x}_i   &= u_i \\
+											\dot{y}_i   &= v_i \\
+											\dot{z}_i   &= w_i \\
+											\dot{u}_i   &= G \sum_{j \neq i}^N \frac{m_j}{|\vec{r}_{ji}|^3}(x_j - x_i) \\
+											\dot{v}_i   &= G \sum_{j \neq i}^N \frac{m_j}{|\vec{r}_{ji}|^3}(y_j - y_i) \\
+											\dot{w}_i   &= G \sum_{j \neq i}^N \frac{m_j}{|\vec{r}_{ji}|^3}(z_j - z_i)
+										\end{align}
+										where
+										$|\vec{r}_{ji}|^3 = \big[ (x_j - x_i)^2 + (y_j - y_i)^2 + (z_j - z_i)^2 \big]^{3/2}$
+
+										We can now apply a numerical integrator (here I've chosen a fourth-order Runge-Kutta, or RK4) to see the time evolution 
+										of this set of equations. Let's write all of our equations as a single <i>vector</i> at time step $n$ which we can 
+										operate on: $\vec{y}_n \equiv \{ {x}_i, {y}_i, {z}_i, {u}_i, {v}_i, {w}_i : i \in N\}$, whose <i>derivative</i> 
+										is $\vec{f}\prime(t_n, \vec{y}_n) = \{ \dot{x}_i, \dot{y}_i, \dot{z}_i, \dot{u}_i, \dot{v}_i, \dot{w}_i : i \in N\}$. 
+										Then, given a time step interval $h$, our RK4 method will do the following algorithm:
+										$$\vec{y}_{n+1} = \vec{y}_n + \frac{1}{6} h (k_1 + 2 k_2 + 2 k_3 + k_4)$$
+										where
+										\begin{align}
+											k_1 &= \vec{f}\prime(t_n, \vec{y}_n) \\
+											k_2 &= \vec{f}\prime(t_n + h/2, \vec{y}_n + h k_1/2) \\
+											k_3 &= \vec{f}\prime(t_n + h/2, \vec{y}_n + h k_2/2) \\
+											k_4 &= \vec{f}\prime(t_n + h, \vec{y}_n + h k_3)
+										\end{align}
+
+										For the following animations, I implemented these equations in the <a href="https://julialang.org/" target="_blank">Julia language</a>
+										language, and then created the visualizations with Python Matplotlib and ffmpeg.
+
+									</p>
+
+									<h3 class="major">Kozai-Lidov Oscillations</h3>
+									<p>Under certain conditions in a three-body system, a dynamical phenomenon known as the 
+										<a href="https://en.wikipedia.org/wiki/Kozai_mechanism", target="_blank">Kozai Mechanism</a> 
+										can cause a distant third body to dramatically affect the orbit of an otherwise stable inner 
+										binary. On a timescale much longer than the orbital period, the perturbing third body drives 
+										a periodic exchange between the inner system's eccentricity and inclination. This process may 
+										be an important factor in planet evolution and migration, and may be a key factor in 
+										explaining how hot Jupiters form.
+									</p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-6">
+												<video width="99%" autoplay muted loop>
+													<source src="media/animation_kozai_CM.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="col-6">
+												<video width="99%" autoplay muted loop>
+													<source src="media/animation_kozai_starframe.mp4" type="video/mp4">
+												</video>
+											</div>
+										</div>
+									</div>
+									<p>The first animation shows a three-body simulation from the rest-frame comoving with the 
+										system's center-of-mass, with two massive objects in orbit around each other and a test 
+										particle orbiting the inner, more massive star. The axes show the spatial scale in AU and 
+										the timescale is shown at the top. The masses and orbital parameters of all three bodies 
+										were selected to optimize viewability for the purpose of the demostration. The second 
+										animation shows the same simulation, only transformed into the rest-frame of the more 
+										massive central star. Here, it becomes apparent that the orbit of the test mass is 
+										perturbed by the outermost star and we can see the periodic changes in the inclination 
+										and eccentricity of its orbit.
+									</p>
+
+									<h3 class="major">The TRAPPIST-1 Planetary System</h3>
+									<p>This animation depicts the <a href="https://en.wikipedia.org/wiki/TRAPPIST-1" target="_blank">TRAPPIST-1</a> 
+										system, a distant solar system with at least seven terrestrial planets orbiting a cool M-dwarf sun.
+									</p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-12">
+												<center>
+													<video width="55%" autoplay muted loop>
+														<source src="media/animation_trappist1.mp4" type="video/mp4">
+													</video>
+												</center>
+											</div>
+										</div>
+									</div>
+
+									<h3 class="major">More Systems</h3>
+									<p>Here are a few more N-body simulations.
+									</p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-6">
+												<video width="99%" autoplay muted loop>
+													<source src="media/animation_binarysystem.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="col-6">
+												<video width="99%" autoplay muted loop>
+													<source src="media/animation_3body.mp4" type="video/mp4">
+												</video>
+											</div>
+										</div>
+									</div>
+									<p>The first animation shows a hypothetical exoplanet system with two planets in stable orbits around a central binary 
+										star (e.g., the circumbinary planet <a href="https://en.wikipedia.org/wiki/Kepler-16b" 
+										target="_blank">Kepler-16b</a>.) The second animation shows a hypothetical planet on a chaotic trajectory 
+										through a binary star system. The planet is ultimately ejected from the system.
+									</p>
+
+									<hr>
+									<ul class="actions">
+										<li><a href="other.html#nbody" class="button primary">
+											<span class="icon solid fa-arrow-left"></span> Return to Other Projects</a></li>
+									</ul>
+
+								</div>
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+				<section id="footer">
+					<div class="inner">
+						<ul class="copyright">
+							<li>&copy; 2023 Caleb K. Harada</li>
+							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							<li>Background art: <a href="https://exoplanets.nasa.gov/resources/118/habitable-exomoon/" target="_blank">NASA/JPL-Caltech</a></li>
+						</ul>
+					</div>
+				</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Caleb K. Harada</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Caleb K. Harada</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="cv.html">Curriculum Vitae</a></li>
+								<li><a href="research.html">Research</a></li>
+								<li><a href="other.html">Other Projects</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						
+						<!-- Content -->
+							<div class="alt wrapper">
+								<div class="inner">
+
+									<h2 class="major">Empirical models of stellar spectra</h2>
+									<p>Stellar spectra are integral to nearly all aspects of modern astrophysics, as they allow us to learn 
+										about a star's physical properties as well as its radial velocity and evolutionary stage. The 
+										following animations show a generative data-driven model that predicts what a stellar spectrum 
+										should look like for a given set of stellar properties (e.g., temperature, surface gravity, and 
+										elemental abundances). The model (2nd-order polynomial in the 5 labels) was trained on data 
+										from the <a href="https://arxiv.org/abs/1509.05420" target=_blank>APOGEE Survey</a> at the wavelength-pixel 
+										level, closely following the procedure of <a href="https://arxiv.org/abs/1501.07604" target=_blank>Ness et al. 2015</a>.
+									</p>
+									<div class="box alt">
+										<div class="row gtr-uniform">
+											<div class="col-6">
+												<video width="99%" autoplay muted loop>
+													<source src="media/animation_rgb.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="col-6">
+												<video width="99%" autoplay muted loop>
+													<source src="media/animation_metallicity.mp4" type="video/mp4">
+												</video>
+											</div>
+										</div>
+									</div>
+									<p>The first movie shows how the spectrum changes as a star evolves off the main sequence and ascends 
+										the red giant branch ("RGB"). The metallicity is fixed to solar metallicity, while logg varies 
+										from 3.5 to 0.5 and Teff simultaneously varies such that the star moves along an isochrone. The 
+										second movie shows how the same region of the spectrum changes with metallicity at fixed Teff and 
+										logg. Clearly, both spectra show deeper absorption lines as the metallicity increases (with all 
+										other parameters fixed) or as the star moves up the RGB at fixed composition. So how can one tell 
+										the difference between a cool, low-logg star and a warmer, higher-logg star that is more metal-rich? 
+										The key is to look at the <i>relative</i> strengths of the absorption lines. As the metallicity at 
+										fixed stellar parameters increases, so does the optical depth of the stellar atmosphere, which 
+										subsequently increases the strength of all the absorption lines somewhat uniformly. However, when 
+										a star ascends the RGB, the physical mechanism for changing absorption line strength is the decrease 
+										in effective temperature, which alters the ionization state of the atmosphere (as described 
+										by the <a href="https://en.wikipedia.org/wiki/Saha_ionization_equation", target="_blank">Saha Equation</a> ). 
+										This sets the the atomic line strengths &#8212; at higher temperatures, more atoms can become ionized due to 
+										thermal collisions. When this happens these atoms can no longer absorb photons, thus decreasing the 
+										strength of absorption lines. Therefore, decreasing Teff increases the strength of absorption lines, 
+										but not all lines are affected equally because different atoms will have different ionization states 
+										at a given temperature.
+									</p>
+
+									<hr>
+									<ul class="actions">
+										<li><a href="other.html#stellarspectra" class="button primary">
+											<span class="icon solid fa-arrow-left"></span> Return to Other Projects</a></li>
+									</ul>
+
+								</div>
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+				<section id="footer">
+					<div class="inner">
+						<ul class="copyright">
+							<li>&copy; 2023 Caleb K. Harada</li>
+							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							<li>Background art: <a href="https://exoplanets.nasa.gov/resources/118/habitable-exomoon/" target="_blank">NASA/JPL-Caltech</a></li>
+						</ul>
+					</div>
+				</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
